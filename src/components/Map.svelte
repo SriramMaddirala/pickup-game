@@ -11,23 +11,35 @@
   
     let map;
     let mapContainer;
-  
-    onMount(() => {
-  
-      const apiKey = 'GHyYucjo1c3lVtuHAnS7';
-  
-      const initialState = { lng: 139.753, lat: 35.6844, zoom: 14 };
-  
+    const initialState = { lng: 139.753, lat: 35.6844, zoom: 14 };
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    function success(pos) {
+      var crd = pos.coords;
+      const apiKey = 'GHyYucjo1c3lVtuHAnS7';  
       map = new Map({
         container: mapContainer,
         style: `https://api.maptiler.com/maps/streets/style.json?key=${apiKey}`,
-        center: [initialState.lng, initialState.lat],
+        center: [crd.longitude, crd.latitude],
         zoom: initialState.zoom
       });
       map.addControl(new NavigationControl(), 'top-right');
       new Marker({color: "#FF0000"})
       .setLngLat([139.7525,35.6846])
       .addTo(map);
+    }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    onMount(() => {
+      navigator.geolocation.getCurrentPosition(success, error, options);
     });
   </script>
   
