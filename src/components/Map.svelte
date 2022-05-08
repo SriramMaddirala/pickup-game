@@ -30,7 +30,7 @@
       });
       map.addControl(new NavigationControl(), 'top-right');
       new Marker({color: "#FF0000"})
-      .setLngLat([139.7525,35.6846])
+      .setLngLat([crd.longitude,crd.latitude])
       .addTo(map);
     }
 
