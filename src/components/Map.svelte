@@ -5,7 +5,7 @@
 </div>
 
 <script>
-    import { onMount, onDestroy } from 'svelte'
+    import { onMount } from 'svelte'
     import { Map, NavigationControl, Marker } from 'maplibre-gl';
     import 'maplibre-gl/dist/maplibre-gl.css';
   
